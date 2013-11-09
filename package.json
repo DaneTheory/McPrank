@@ -1,6 +1,6 @@
 {
   "name": "Popcorn",
-  "version": "1.0.0-1",
+  "version": "1.0.0-2",
   "description": "Web app letting you watch youtube videos with friends!",
   "main": "index.js",
   "dependencies": {

@@ -5,12 +5,19 @@
 	
 	<meta charset="ISO-8859-1">
 	<title>Popcorn</title>
+	<script type="text/javascript" src="swfobject/src/swfobject.js"></script>
 	<script type="text/javascript">
 
 	var ws = null;
 	var username = '';
 	var isLocal = 0;
 	var movieQueue = new Array();
+
+	var video_id = "XqWig2WARb0";
+	
+
+	
+
 	$(document).ready(function() {
 		
 		if (isLocal == 1){
@@ -41,9 +48,14 @@
 			if(value.indexOf("http") != -1 || value.indexOf("www.") != -1)
 			{
 				movie = getVideoID(value);
-				movieQueue.push(movie);
-				$("#video").html("<iframe width='100%' height='500' src='//www.youtube.com/embed/"+movie+"?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>");
 				value = " shared a video.";
+
+				movieQueue.push(movie);
+				//startVideo(movie);
+				if (movieQueue.length == 1)
+					playNextVideo();
+
+				updateVideoQueue();
 			}
 
 			el.append('<div>' + username + ": " + value + '</div>');
@@ -71,6 +83,49 @@
 	var getVideoID = function(input)
 	{
 		return input.substring(input.length - 11);
+	};
+	var updateVideoQueue = function(input)
+	{
+		$("#queue").html("");
+		for (var i = 0; i < movieQueue.length; i++) {
+			$("#queue").html($("#queue").html() + " | " + movieQueue[i]);
+		}
+	};
+	var startVideo = function(video_id)
+	{
+		var player_id = "video";
+		var params = { allowScriptAccess: "always" };
+		var url = "http://www.youtube.com/e/" + video_id + "?enablejsapi=1&autoplay=1&playerapiid=" + player_id;
+		swfobject.embedSWF(url, player_id, '480', '390', "9.0.0", null, null, params, {'id': player_id});
+
+		var player = null;
+
+	};
+
+	var playNextVideo = function()
+	{
+		if (movieQueue.length > 0)
+		{
+			startVideo(movieQueue[0]);
+			
+		}
+	};
+
+	function onYouTubePlayerReady(player_id) {
+	  player = document.getElementById(player_id);
+	  player.addEventListener('onStateChange', 'playerFinished');
+	};
+
+	function playerFinished(response) {
+	  // response 0 means playback is finished
+	  if (response == 0) {
+	  	if (movieQueue.length > 0)
+		{
+	  		movieQueue.splice(0, 1);
+	  		updateVideoQueue();
+	  	}
+	    playNextVideo();
+	  }
 	};
 	</script>
 </head>
