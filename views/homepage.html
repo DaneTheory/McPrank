@@ -1,28 +1,29 @@
+<!DOCTYPE html>
 
-<div><input type="text" id="message" placeholder="your message" /></div>
-<div id="chat"></div>
-
-<script type="text/javascript">
+<html>
+<head>
+	
+	<meta charset="ISO-8859-1">
+	<title>Popcorn</title>
+	<script type="text/javascript">
 
 	var ws = null;
 	var username = '';
 
 	$(document).ready(function() {
 
-		username = prompt('Your name:', username) || '';
-		
-		if (username.length === 0)
-			return;
+		while(username.length === 0)
+			username = prompt('Please enter your name', username) || '';
 
 		ws = new WebSocket('ws://shmed-popcorn.jit.su');
 
 		ws.onopen = function() {
-			ws.send(JSON.stringify({ username: username, message: 'online' }));
+			ws.send(JSON.stringify({ username: username, message: ' is now online.' }));
 		};
 
 		ws.onmessage = function(e) {
 			var el = $('#chat');
-			el.prepend('<div>' + JSON.parse(decodeURIComponent(e.data)).message + '</div>');
+			el.append('<div>' + JSON.parse(decodeURIComponent(e.data)).message + '</div>');
 		};
 
 		window.onunload = function() {
@@ -35,7 +36,12 @@
 				return;
 
 			var value = this.value;
-
+			if(value.indexOf("http") === 0 || value.indexOf("www.") === 0)
+			{
+				value = " shared a video.";
+				alert(getVideoID(value));
+				$("#video").append("<iframe width='100%' height='500' src='//www.youtube.com/embed/"+getVideoID($("#message").val())+"' frameborder='0' allowfullscreen></iframe>");
+			}
 			ws.send(JSON.stringify({ message: value }));
 			this.value = '';
 
@@ -43,4 +49,33 @@
 
 	});
 
-</script>
+	//extracts the video ID from a Youtube link
+	var getVideoID = function(input)
+	{
+		return input.substring(input.length - 11);
+	};
+	</script>
+</head>
+<body>
+        <h1>Popcorn</h1>
+        <div id="mainview">
+            <div id="mainarea">
+            	<div id="video">
+            	</div>
+               	<nav id="navigationbar">
+                    <ul>
+                        <li><a class="not-active" id="leftmost">Home</a></li>
+                        <li><a class="active" href="help.html">Help</a></li>
+                        <li><a class="active" href="about.html">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="sidearea">
+              	<input type="text" id="message" placeholder="Talk here, or share a video!" />
+				<div id="chat">
+				</div>
+            </div>
+       	</div>
+        <p id="masthead">Code and design by Raouf Merouche & Mohamed Adam Chaieb</p>
+</body>
+</html>
