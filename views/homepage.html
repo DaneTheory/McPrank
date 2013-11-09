@@ -1,0 +1,46 @@
+
+<div><input type="text" id="message" placeholder="your message" /></div>
+<div id="chat"></div>
+
+<script type="text/javascript">
+
+	var ws = null;
+	var username = '';
+
+	$(document).ready(function() {
+
+		username = prompt('Your name:', username) || '';
+		
+		if (username.length === 0)
+			return;
+
+		ws = new WebSocket('ws://127.0.0.1:8005');
+
+		ws.onopen = function() {
+			ws.send(JSON.stringify({ username: username, message: 'online' }));
+		};
+
+		ws.onmessage = function(e) {
+			var el = $('#chat');
+			el.prepend('<div>' + JSON.parse(decodeURIComponent(e.data)).message + '</div>');
+		};
+
+		window.onunload = function() {
+			ws.close();
+		};
+
+		$('#message').bind('keypress', function(e) {
+
+			if (e.keyCode !== 13)
+				return;
+
+			var value = this.value;
+
+			ws.send(JSON.stringify({ message: value }));
+			this.value = '';
+
+		});
+
+	});
+
+</script>
