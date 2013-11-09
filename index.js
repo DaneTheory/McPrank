@@ -1,6 +1,7 @@
 var framework = require('partial.js');
 var http = require('http');
 var os = require('os');
+var name = framework.config['name'];
 
 var index = process.argv.indexOf('backup');
 if (index !== -1) {
@@ -19,7 +20,7 @@ if (index !== -1) {
 	return;
 }
 
-var port = parseInt(process.argv[2] || '8005');
+var port = parseInt(process.argv[2] || '8080');
 var debug = true;
 
 framework.run(http, debug, port);

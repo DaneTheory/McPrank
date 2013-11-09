@@ -1,0 +1,31 @@
+{
+  "name": "Popcorn",
+  "version": "1.0.0",
+  "description": "Web app letting you watch youtube videos with friends!",
+  "main": "index.js",
+  "dependencies": {
+    "partial.js": "~1.2.7-1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mac-adam-chaieb/popcorn.git"
+  },
+  "keywords": [
+    "video",
+    "youtube",
+    "friends"
+  ],
+  "author": "Raouf Merouche & Mohamed Adam Chaieb",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/mac-adam-chaieb/popcorn/issues"
+  },
+  "subdomain": "shmed-Popcorn",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
