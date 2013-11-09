@@ -57,6 +57,11 @@
 
 				updateVideoQueue();
 			}
+			if (value[0] == '#')
+			{
+				startVideo(getVideoID(value));
+				value = " changed video."
+			}
 
 			el.append('<div>' + username + ": " + value + '</div>');
 			el.scrollTop = el.scrollHeight;
@@ -89,7 +94,11 @@
 		$("#queue").html("");
 		for (var i = 0; i < movieQueue.length; i++) {
 
-			$("#queue").html($("#queue").html() + "<img width='160' height='120' src='http://img.youtube.com/vi/"+ movieQueue[i] + "/0.jpg'/><br />");
+			$("#queue").html($("#queue").html() + "<img width='160' onclick='clickOnVideo(this.id)' height='120' id='tm"+ movieQueue[i] + "' src='http://img.youtube.com/vi/"+ movieQueue[i] + "/0.jpg'/><br />");
+		 	
+
+		 	 // $("#tm"+movieQueue[i]).click(); 
+
 		}
 	};
 	var startVideo = function(video_id)
@@ -128,6 +137,11 @@
 	    playNextVideo();
 	  }
 	};
+
+	function clickOnVideo(input){
+	 	 	ws.send(JSON.stringify({ message: "#" + getVideoID(input) }));
+	 	 	startVideo(videoId);
+	}
 	</script>
 </head>
 <body>
