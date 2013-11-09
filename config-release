@@ -1,3 +1,4 @@
 name         : popcorn
 version      : 1.01
 secret       : your-secret-key
+isLocal		 : 0

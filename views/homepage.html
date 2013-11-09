@@ -9,13 +9,25 @@
 
 	var ws = null;
 	var username = '';
-
+	var isLocal = 0;
+	var movieQueue = new Array();
 	$(document).ready(function() {
-
+		
+		if (isLocal == 1){
+			username = "Raouf";
+		}
+		console.log(username);
 		while(username.length === 0)
 			username = prompt('Please enter your name', username) || '';
 
-		ws = new WebSocket('ws://shmed-popcorn.jit.su');
+
+		if (isLocal == 1){
+			ws = new WebSocket('ws://172.26.4.89:8080/');
+		}
+		else{
+			ws = new WebSocket('ws://shmed-popcorn.jit.su');
+		}
+		
 
 		ws.onopen = function() {
 			ws.send(JSON.stringify({ username: username, message: ' is now online.' }));
@@ -23,7 +35,19 @@
 
 		ws.onmessage = function(e) {
 			var el = $('#chat');
-			el.append('<div>' + JSON.parse(decodeURIComponent(e.data)).message + '</div>');
+
+			var value = JSON.parse(decodeURIComponent(e.data)).message;
+			var username = JSON.parse(decodeURIComponent(e.data)).username;
+			if(value.indexOf("http") != -1 || value.indexOf("www.") != -1)
+			{
+				movie = getVideoID(value);
+				movieQueue.push(movie);
+				$("#video").html("<iframe width='100%' height='500' src='//www.youtube.com/embed/"+movie+"?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>");
+				value = " shared a video.";
+			}
+
+			el.append('<div>' + username + ": " + value + '</div>');
+			el.scrollTop = el.scrollHeight;
 		};
 
 		window.onunload = function() {
@@ -36,12 +60,6 @@
 				return;
 
 			var value = this.value;
-			if(value.indexOf("http") === 0 || value.indexOf("www.") === 0)
-			{
-				value = " shared a video.";
-				alert(getVideoID(value));
-				$("#video").append("<iframe width='100%' height='500' src='//www.youtube.com/embed/"+getVideoID($("#message").val())+"' frameborder='0' allowfullscreen></iframe>");
-			}
 			ws.send(JSON.stringify({ message: value }));
 			this.value = '';
 
@@ -62,20 +80,16 @@
             <div id="mainarea">
             	<div id="video">
             	</div>
-               	<nav id="navigationbar">
-                    <ul>
-                        <li><a class="not-active" id="leftmost">Home</a></li>
-                        <li><a class="active" href="help.html">Help</a></li>
-                        <li><a class="active" href="about.html">About</a></li>
-                    </ul>
-                </nav>
+            	<div id="queue">
+            	</div>
             </div>
             <div id="sidearea">
-              	<input type="text" id="message" placeholder="Talk here, or share a video!" />
 				<div id="chat">
+				
 				</div>
+				<input type="text" id="message" placeholder="Talk here, or share a video!" />
             </div>
        	</div>
-        <p id="masthead">Code and design by Raouf Merouche & Mohamed Adam Chaieb</p>
+       	<div id="lowerarea"><p id="masthead">Code and design by Raouf Merouche & Mohamed Adam Chaieb</p></div>
 </body>
 </html>

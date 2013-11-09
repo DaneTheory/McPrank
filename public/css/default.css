@@ -1,117 +1,108 @@
 @#auto-vendor-prefix#@
-
-body {
-	min-width:860px;	
+html, body {
+	height:100%;
 }
 
-* {
+body {
+	font-family:verdana;
+	margin:auto;
+	color:white;
+/*	background-color:#0F0F0F;*/
+background-image:url("/img/background1.jpg");
+background-position: -500px -180px;
+
+}
+
+/** {
 	position:relative;
 	font-family:"Calibri Light";
 	font-weight:lighter;
 	cursor:default;
 }
-
+*/
 #mainview {
-	height:900px;
-	width:80%;
-	margin:0px auto;
-	border:1px solid #E0E0E0;
-	border-bottom-right-radius:10px;
-	border-bottom-left-radius:10px;
-	border-top-width: 0px;
+	height:calc(100% - 65px);
+/*	background-color:green;*/
+	width:100%;
 	padding:0px;
 }
 
-#sidebutton {
-	height:100%;
-	width:20%;
-	border-width:0px;
-	border-left:1px solid #E0E0E0;
-	background-color:white;
-	border-bottom-right-radius:10px;
-	box-sizing:border-box;
-	float:right;
-}
-
-#sidebutton:HOVER {
-	background-color:#EEEEEE;
-}
 
 #sidearea {
 	height:100%;
-	width:35%;
+	width:300px;
 	border-width:0px;
-	border-left:1px solid #E0E0E0;
-	background-color:white;
-	border-bottom-right-radius:10px;
 	box-sizing:border-box;
 	float:right;
+	background-color:rgba(0, 0, 0, 0.8);
+	margin-right:20px;
 }
 
 #mainarea {
 	height:100%;
-	width:65%;
+	width:calc(100% - 320px);
 	float:left;
 	box-sizing:border-box;
 	position:relative;
 }
 
-#chat {
-	box-sizing:border-box;
-	height:90%;
-	width:100%;
-	font-size:20px;
-	margin:10px 0px;
-	border-width:1px;
-	border-left-style:none;
-	border-right-style:none;
-	padding:1px 5px;
-	border-bottom:1px solid #505050;
-	border-top:1px solid #EEEEEE;
-}
+
 
 h1 {
-	height:75px;
-	font-family:"Century Gothic";
-	font-size:50px;
+	height:45px;
+	color:white;
+	font-size:2em;
 	text-align:center;
-	padding:5px;
-	border-bottom: 3px solid #E0E0E0;
-	margin:0px -10px;
+/*	background-color:#871B1B;*/
+	margin:0px;
 }
 
 h2 {
 	height:35px;
 	font-size:28px;
 	color:#505050;	
-	margin:10px;
-	margin-bottom:0px;
 }
 
 p {
 	font-size:18px;
 	text-align:justify;
 	color:#505050;
-	margin:10px;
-	margin-bottom:0px;
 }
 
 #video {
-	
+/*	background-color:yellow;*/
+	width:100%;
+	height:calc(100% - 150px);
+}
+#queue {
+	height:150px;
+	width:calc(100% - 20px);
+	margin-left:10px;
+	display:block;
+	padding:0px;
+	background-color:rgba(0, 0, 0, 0.8);
+/*	background-color:blue;*/
+}
+
+#chat {
+	box-sizing:border-box;
+	height:calc(100% - 40px);
+	overflow-y:auto;
 }
 
 #message {
 	box-sizing:border-box;
-	height:35px;
+	height:30px;
+	position:relative;
+	bottom:1px;
 	width:100%;
-	font-size:20px;
-	margin:10px 0px;
+	height:35px;
 	border-width:1px;
 	border-left-style:none;
 	border-right-style:none;
-	padding:1px 5px;
 	border-bottom:1px solid #505050;
 	border-top:1px solid #EEEEEE;
+
 }
 
 #message:HOVER {
@@ -126,23 +117,15 @@ p {
 	margin:30px -1px;
 }
 
-#navigationbar {
-	height:40px;
-	width:100%;
-	display:block;
-	border-top:1px solid #E0E0E0;
-	padding:0px;
-	position:absolute;
-	bottom:-1px;
-}
 
-#navigationbar ul {
+
+/*#navigationbar ul {
 	box-sizing:border-box;
 	height:100%;
 	padding:0px;
 	margin:0px;
-}
-
+}*/
+/*
 #navigationbar li {
 	width:100px;
 	height:100%;
@@ -176,16 +159,14 @@ p {
 	border-bottom-left-radius:10px;
 	border-left-style:hidden;
 }
-
+*/
 .not-active {
 	border-top:1px solid white;
 }
 
 #masthead {
-	font-size:small;
 	text-align:center;
 }
 
 .brand {
-	font-family:"Century Gothic";
 }

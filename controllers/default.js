@@ -14,12 +14,13 @@ function socket_homepage(controller) {
         if (message.username)
             client.id = message.username;
 
-        controller.send({ message: client.id + ': ' + message.message });
+        controller.send({ username: client.id, message: message.message });
 
     });
 
     controller.on('close', function(client) {
-        controller.send({ message: client.id + ': offline' });
+        controller.send({ username: client.id, message: 'offline' });
+        
         console.log('online:', controller.online);
     });
 };
