@@ -89,7 +89,7 @@
 		$("#queue").html("");
 		for (var i = 0; i < movieQueue.length; i++) {
 
-			$("#queue").html($("#queue").html() + "<img width='160' height='120' src='http://img.youtube.com/vi/"+ movieQueue[i] + "/0.jpg'/> ");
+			$("#queue").html($("#queue").html() + "<img width='160' height='120' src='http://img.youtube.com/vi/"+ movieQueue[i] + "/0.jpg'/><br />");
 		}
 	};
 	var startVideo = function(video_id)
@@ -131,20 +131,26 @@
 	</script>
 </head>
 <body>
-        <h1>Popcorn</h1>
+        <h1><img src="img/popcorn.png" /></h1>
         <div id="mainview">
-            <div id="mainarea">
-            	<div id="video">
-            	</div>
-            	<div id="queue">
-            	</div>
-            </div>
-            <div id="sidearea">
+           
+            <div id="sidearearight">
 				<div id="chat">
 				
 				</div>
 				<input type="text" id="message" placeholder="Talk here, or share a video!" />
             </div>
+            <div id="sidearealeft">
+            	<div id="queue">
+            	</div>
+        	</div>
+
+        	 <div id="mainarea">
+            	<div id="video">
+            	</div>
+            	
+            </div>
+
        	</div>
        	<div id="lowerarea"><p id="masthead">Code and design by Raouf Merouche & Mohamed Adam Chaieb</p></div>
 </body>
