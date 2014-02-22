@@ -10,7 +10,7 @@
 
 	var ws = null;
 	var username = '';
-	var isLocal = 0;
+	var isLocal = 1;
 	var movieQueue = new Array();
 
 	var video_id = "XqWig2WARb0";
@@ -29,7 +29,7 @@
 
 
 		if (isLocal == 1){
-			ws = new WebSocket('ws://172.26.4.89:8080/');
+			ws = new WebSocket('ws://127.0.0.1:8080/');
 		}
 		else{
 			ws = new WebSocket('ws://shmed-popcorn.jit.su');

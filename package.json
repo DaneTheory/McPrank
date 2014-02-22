@@ -4,7 +4,8 @@
   "description": "Web app letting you watch youtube videos with friends!",
   "main": "index.js",
   "dependencies": {
-    "partial.js": "~1.2.7-1"
+    "partial.js": "~1.2.7-1",
+    "socket.io" : "*"
   },
   "devDependencies": {},
   "repository": {
